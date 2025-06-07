@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosotros - Dynatrix Systems</title>
+    <link rel="icon" href="imagenes/logo.png" type="Dynatrix Systems">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #6366f1;
+            --secondary-color: #8b5cf6;
+            --accent-color: #06b6d4;
+            --dark-bg: #0f172a;
+            --light-bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --text-light: #94a3b8;
+            --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            --shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--light-bg);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+        header {
+            background: var(--dark-bg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient);
+            opacity: 0.1;
+            z-index: 1;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .header-content h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .header-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        nav a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        nav a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        nav a:hover::before,
+        nav a.activo::before {
+            left: 0;
+        }
+
+        nav a:hover,
+        nav a.activo {
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 5rem 0;
+            position: relative;
+        }
+
+        /* Intro Section */
+        .intro {
+            background: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .intro::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient);
+            opacity: 0.03;
+        }
+
+        .intro-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: var(--text-primary);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+
+        .intro p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* Team Section */
+        .equipo {
+            background: var(--light-bg);
+        }
+
+        .miembros {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .miembro {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .miembro::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .miembro:hover::before {
+            transform: scaleX(1);
+        }
+
+        .miembro:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .miembro-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .miembro-avatar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.3) 50%, transparent 70%);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .miembro:hover .miembro-avatar::before {
+            transform: translateX(100%);
+        }
+
+        .miembro h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .miembro p {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* Mission Vision Section */
+        .mision-vision {
+            background: white;
+            position: relative;
+        }
+
+        .mision-vision-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-top: 3rem;
+        }
+
+        .mision-card, .vision-card {
+            padding: 2rem;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mision-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .vision-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .mision-card::before,
+        .vision-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+            transform: translateX(-100%);
+            transition: transform 0.8s ease;
+        }
+
+        .mision-card:hover::before,
+        .vision-card:hover::before {
+            transform: translateX(100%);
+        }
+
+        .card-title {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-text {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            opacity: 0.95;
+        }
+
+        /* Values Section */
+        .valores {
+            background: var(--light-bg);
+        }
+
+        .valores-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .valor-item {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .valor-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .valor-item:hover::before {
+            opacity: 0.1;
+        }
+
+        .valor-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .valor-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+            color: white;
+            position: relative;
+            z-index: 2;
+        }
+
+        .valor-text {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-bg);
+            color: var(--text-light);
+            text-align: center;
+            padding: 2.5rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient);
+            opacity: 0.1;
+        }
+
+        footer p {
+            position: relative;
+            z-index: 2;
+            font-size: 1rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .animate-on-scroll.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .header-subtitle {
+                font-size: 1.1rem;
+            }
+
+            nav {
+                gap: 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .mision-vision-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .valores-grid {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 3rem 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .header-content {
+                padding: 2rem 1rem;
+            }
+
+            .header-content h1 {
+                font-size: 2rem;
+            }
+
+            .miembros {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>Conócenos</h1>
+            <p class="header-subtitle">Innovación, pasión y excelencia en cada proyecto</p>
+            <nav>
+                <a href="index.html"><i class="fas fa-home"></i> Inicio</a>
+                <a href="nosotros.html" class="activo"><i class="fas fa-users"></i> Nosotros</a>
+                <a href="#equipo"><i class="fas fa-user-friends"></i> Equipo</a>
+                <a href="#mision"><i class="fas fa-bullseye"></i> Misión y Visión</a>
+                <a href="#valores"><i class="fas fa-heart"></i> Valores</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="intro">
+            <div class="container">
+                <div class="intro-content animate-on-scroll">
+                    <h2 class="section-title">¿Quiénes somos?</h2>
+                    <p>Somos Dynatrix Systems, una empresa enfocada en crear soluciones de software innovadoras, eficientes y centradas en las personas. Transformamos ideas en realidades digitales que impactan positivamente en la vida de nuestros usuarios.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="equipo" class="equipo">
+            <div class="container">
+                <h2 class="section-title animate-on-scroll">Nuestro Equipo</h2>
+                <div class="miembros">
+                    <div class="miembro animate-on-scroll">
+                        <img class="miembro-avatar" src="imagenes/Firewall DevCode.png" alt="FDC">
+                        <h3>Firewall DevCode</h3>
+                        <p>Liderado por: Emiliano Hernández</p>
+                    </div>
+                    <div class="miembro animate-on-scroll">
+                        <img class="miembro-avatar" src="imagenes/RootForce.png" alt="RF">
+                        <h3>RootForce</h3>
+                        <p>Liderador por: Jorge Escamilla</p>
+                    </div>
+                    <div class="miembro animate-on-scroll">
+                        <img class="miembro-avatar" src="imagenes/CiberX.png" alt="CX">
+                        <h3>CyberX</h3>
+                        <p>Liderado por: Jonathan Sanchez</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="mision" class="mision-vision">
+            <div class="container">
+                <h2 class="section-title animate-on-scroll">Nuestra Misión y Visión</h2>
+                <div class="mision-vision-grid">
+                    <div class="mision-card animate-on-scroll">
+                        <h3 class="card-title">
+                            <i class="fas fa-rocket"></i>
+                            Misión
+                        </h3>
+                        <p class="card-text">Impulsar el progreso digital con software confiable, accesible y moderno que transforme la vida de nuestros usuarios, creando soluciones que realmente marquen la diferencia.</p>
+                    </div>
+                    <div class="vision-card animate-on-scroll">
+                        <h3 class="card-title">
+                            <i class="fas fa-eye"></i>
+                            Visión
+                        </h3>
+                        <p class="card-text">Ser líderes en innovación tecnológica en América Latina, marcando un impacto positivo en cada proyecto que desarrollamos y siendo reconocidos por nuestra excelencia.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="valores" class="valores">
+            <div class="container">
+                <h2 class="section-title animate-on-scroll">Nuestros Valores</h2>
+                <div class="valores-grid">
+                    <div class="valor-item animate-on-scroll">
+                        <div class="valor-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <p class="valor-text">Innovación</p>
+                    </div>
+                    <div class="valor-item animate-on-scroll">
+                        <div class="valor-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <p class="valor-text">Ética profesional</p>
+                    </div>
+                    <div class="valor-item animate-on-scroll">
+                        <div class="valor-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <p class="valor-text">Compromiso con el cliente</p>
+                    </div>
+                    <div class="valor-item animate-on-scroll">
+                        <div class="valor-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <p class="valor-text">Trabajo en equipo</p>
+                    </div>
+                    <div class="valor-item animate-on-scroll">
+                        <div class="valor-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="valor-text">Excelencia</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Dynatrix Systems. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Add staggered animation delays
+        document.querySelectorAll('.miembro').forEach((el, index) => {
+            el.style.animationDelay = `${index * 0.2}s`;
+        });
+
+        document.querySelectorAll('.valor-item').forEach((el, index) => {
+            el.style.animationDelay = `${index * 0.1}s`;
+        });
+
+        // Add parallax effect to header
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const header = document.querySelector('header');
+            if (header) {
+                header.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+    </script>
+</body>
+</html>
