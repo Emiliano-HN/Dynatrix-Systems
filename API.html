@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Documentación de la API - Theia Cloud</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+
+    body {
+      background-color: #121212;
+      color: #e0e0e0;
+      font-family: 'Roboto Mono', monospace;
+      margin: 0;
+      padding: 40px;
+      line-height: 1.7;
+    }
+
+    h1, h2, h3 {
+      color: #00bcd4;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      margin-top: 40px;
+      border-bottom: 2px solid #00bcd4;
+      padding-bottom: 5px;
+    }
+
+    h3 {
+      margin-top: 25px;
+    }
+
+    code {
+      background: #1e1e1e;
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #80deea;
+    }
+
+    pre {
+      background: #1e1e1e;
+      padding: 15px;
+      border-radius: 8px;
+      overflow-x: auto;
+      color: #80deea;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      border: 1px solid #333;
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background: #00bcd4;
+      color: #121212;
+    }
+
+    a {
+      color: #80deea;
+    }
+
+    ::selection {
+      background: #00bcd4;
+      color: #121212;
+    }
+
+    @media (max-width: 800px) {
+      body {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <h1>📌 Documentación de la API - Theia Cloud</h1>
+
+  <h2>Información General</h2>
+  <table>
+    <tr><th>Campo</th><th>Valor</th></tr>
+    <tr><td>Base URL</td><td><code>https://api.theiacloud.com/api/v1</code></td></tr>
+    <tr><td>Protocolo</td><td>HTTPS</td></tr>
+    <tr><td>Formato</td><td>JSON</td></tr>
+    <tr><td>Autenticación</td><td>JWT Bearer Token</td></tr>
+  </table>
+
+  <h2>Endpoints</h2>
+
+  <h3>🔑 Autenticación</h3>
+
+  <h4>POST /auth/login</h4>
+  <p>Iniciar sesión con credenciales y obtener token JWT.</p>
+  <p><strong>Body:</strong></p>
+  <pre>{
+  "username": "usuario",
+  "password": "contraseña"
+}</pre>
+  <p><strong>Response:</strong></p>
+  <pre>{
+  "token": "JWT_TOKEN_AQUI",
+  "expiresIn": 3600
+}</pre>
+
+  <h4>POST /auth/register</h4>
+  <p>Registrar un nuevo usuario.</p>
+  <p><strong>Body:</strong></p>
+  <pre>{
+  "username": "nuevo_usuario",
+  "password": "contraseña_segura",
+  "email": "correo@example.com"
+}</pre>
+  <p><strong>Response:</strong></p>
+  <pre>{
+  "message": "Usuario creado exitosamente."
+}</pre>
+
+  <h3>📁 Proyectos</h3>
+
+  <h4>GET /projects</h4>
+  <p>Obtener lista de proyectos del usuario.</p>
+  <p><strong>Header:</strong> <code>Authorization: Bearer &#123;token&#125;</code></p>
+  <p><strong>Response:</strong></p>
+  <pre>[
+  {
+    "id": "proj-123",
+    "name": "Mi Proyecto",
+    "createdAt": "2025-06-22T18:00:00Z",
+    "updatedAt": "2025-06-22T19:00:00Z"
+  }
+]</pre>
+
+  <h4>POST /projects</h4>
+  <p>Crear un nuevo proyecto.</p>
+  <p><strong>Body:</strong></p>
+  <pre>{
+  "name": "Nombre del Proyecto"
+}</pre>
+  <p><strong>Response:</strong></p>
+  <pre>{
+  "id": "proj-123",
+  "name": "Nombre del Proyecto",
+  "createdAt": "2025-06-22T18:00:00Z"
+}</pre>
+
+  <h4>GET /projects/{id}</h4>
+  <p>Obtener detalles de un proyecto.</p>
+  <p><strong>Response:</strong></p>
+  <pre>{
+  "id": "proj-123",
+  "name": "Mi Proyecto",
+  "files": ["archivo1.js", "archivo2.txt"],
+  "createdAt": "...",
+  "updatedAt": "..."
+}</pre>
+
+  <h4>PUT /projects/{id}</h4>
+  <p>Actualizar nombre del proyecto.</p>
+  <p><strong>Body:</strong></p>
+  <pre>{
+  "name": "Nuevo nombre"
+}</pre>
+
+  <h4>DELETE /projects/{id}</h4>
+  <p>Eliminar proyecto.</p>
+  <p><strong>Response:</strong></p>
+  <pre>{
+  "message": "Proyecto eliminado correctamente."
+}</pre>
+
+  <h3>📂 Archivos</h3>
+
+  <h4>POST /files/upload</h4>
+  <p>Subir archivo a un proyecto.</p>
+  <p><strong>Form-data:</strong></p>
+  <ul>
+    <li><code>projectId</code>: ID del proyecto</li>
+    <li><code>file</code>: Archivo a subir</li>
+  </ul>
+  <p><strong>Response:</strong></p>
+  <pre>{
+  "fileId": "file-456",
+  "fileName": "mi_archivo.js",
+  "uploadedAt": "2025-06-22T19:00:00Z"
+}</pre>
+
+  <h4>GET /files/download/{fileId}</h4>
+  <p>Descargar archivo por ID.</p>
+
+  <h3>🖥️ IDE</h3>
+
+  <h4>GET /ide/status</h4>
+  <p>Verificar estado de la sesión IDE.</p>
+  <pre>{
+  "status": "active",
+  "sessionId": "sess-789",
+  "startedAt": "2025-06-22T19:00:00Z"
+}</pre>
+
+  <h4>POST /ide/start</h4>
+  <p>Iniciar sesión de IDE en la nube.</p>
+  <pre>{
+  "sessionId": "sess-789",
+  "url": "https://theiacloud.com/ide/sess-789",
+  "expiresAt": "2025-06-22T19:30:00Z"
+}</pre>
+
+  <h4>POST /ide/stop</h4>
+  <p>Detener sesión activa.</p>
+  <pre>{
+  "message": "Sesión cerrada."
+}</pre>
+
+  <h2>Códigos de Respuesta</h2>
+  <table>
+    <tr><th>Código</th><th>Descripción</th></tr>
+    <tr><td>200 OK</td><td>Éxito</td></tr>
+    <tr><td>201 Created</td><td>Recurso creado</td></tr>
+    <tr><td>204 No Content</td><td>Eliminación sin contenido</td></tr>
+    <tr><td>400 Bad Request</td><td>Petición mal formada</td></tr>
+    <tr><td>401 Unauthorized</td><td>Token inválido o no enviado</td></tr>
+    <tr><td>403 Forbidden</td><td>Sin permisos</td></tr>
+    <tr><td>404 Not Found</td><td>Recurso no existe</td></tr>
+    <tr><td>409 Conflict</td><td>Conflicto de datos</td></tr>
+    <tr><td>500 Internal Server Error</td><td>Error inesperado</td></tr>
+  </table>
+
+</body>
+
+</html>
