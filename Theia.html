@@ -1,11 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="imagenes/Theia.png" type="Theia">
-    <title>Theia - Editor de Código Profesional</title>
+    <link rel="icon" href="imagenes/Theia.png" type="image/png">
+    <title>Xedron - Editor de Código Profesional</title>
     <style>
         * {
             margin: 0;
@@ -453,6 +452,455 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+                .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border-radius: 2px;
+        }
+
+        /* Code Preview Section */
+        .code-preview {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .editor-container {
+            background: #1e1e1e;
+            border-radius: 12px;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.6);
+            overflow: hidden;
+            margin: 2rem auto;
+            max-width: 900px;
+            border: 1px solid #333;
+            position: relative;
+        }
+
+        .editor-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #4ecdc4, transparent);
+            opacity: 0.6;
+        }
+
+        .editor-header {
+            background: linear-gradient(135deg, #2d2d30 0%, #252526 100%);
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #333;
+        }
+
+        .editor-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .window-controls {
+            display: flex;
+            gap: 8px;
+        }
+
+        .control-btn {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .control-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .control-btn:hover::before {
+            opacity: 1;
+        }
+
+        .control-btn.close {
+            background: #ff5f57;
+        }
+
+        .control-btn.close:hover::before {
+            content: '×';
+            color: #fff;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        .control-btn.minimize {
+            background: #ffbd2e;
+        }
+
+        .control-btn.minimize:hover::before {
+            content: '−';
+            color: #fff;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        .control-btn.maximize {
+            background: #28ca42;
+        }
+
+        .control-btn.maximize:hover::before {
+            content: '□';
+            color: #fff;
+            font-size: 8px;
+        }
+
+        .tab-container {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            margin-left: 20px;
+        }
+
+        .tab {
+            background: #2d2d30;
+            padding: 8px 16px;
+            border-radius: 8px 8px 0 0;
+            color: #cccccc;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid #333;
+            border-bottom: none;
+        }
+
+        .tab.active {
+            background: #1e1e1e;
+            color: #fff;
+            border-color: #4ecdc4;
+        }
+
+        .tab:not(.active):hover {
+            background: #37373d;
+        }
+
+        .file-icon {
+            width: 16px;
+            height: 16px;
+            background: #ff6b6b;
+            border-radius: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .file-icon.js { background: #f7df1e; color: #000; }
+        .file-icon.vue { background: #4fc08d; }
+        .file-icon.css { background: #1572b6; }
+
+        .tab-close {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            opacity: 0;
+            transition: all 0.2s ease;
+            color: #cccccc;
+        }
+
+        .tab:hover .tab-close {
+            opacity: 1;
+        }
+
+        .tab-close:hover {
+            background: #ff5f57;
+            color: white;
+        }
+
+        .editor-toolbar {
+            background: #252526;
+            padding: 8px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid #333;
+            font-size: 12px;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            color: #cccccc;
+        }
+
+        .breadcrumb-separator {
+            color: #666;
+        }
+
+        .editor-actions {
+            margin-left: auto;
+            display: flex;
+            gap: 8px;
+        }
+
+        .action-btn {
+            padding: 4px 8px;
+            background: transparent;
+            border: 1px solid #333;
+            border-radius: 4px;
+            color: #cccccc;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 11px;
+        }
+
+        .action-btn:hover {
+            background: #37373d;
+            border-color: #4ecdc4;
+        }
+
+        .line-numbers {
+            background: #252526;
+            padding: 20px 0;
+            width: 60px;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            color: #858585;
+            border-right: 1px solid #333;
+            user-select: none;
+            float: left;
+        }
+
+        .line-number {
+            height: 20px;
+            line-height: 20px;
+            position: relative;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .line-number:hover {
+            color: #fff;
+        }
+
+        .line-number.active {
+            color: #4ecdc4;
+            background: rgba(78, 205, 196, 0.1);
+        }
+
+        .code-content {
+            padding: 20px 20px 20px 80px;
+            text-align: left;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 20px;
+            background: #1e1e1e;
+            color: #d4d4d4;
+            min-height: 400px;
+            position: relative;
+            overflow-x: auto;
+        }
+
+        .code-line {
+            min-height: 20px;
+            position: relative;
+            padding-left: 20px;
+            transition: background-color 0.2s ease;
+        }
+
+        .code-line:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .code-line.highlight {
+            background: rgba(78, 205, 196, 0.1);
+            border-left: 3px solid #4ecdc4;
+        }
+
+        .code-line.error {
+            background: rgba(255, 107, 107, 0.1);
+            border-left: 3px solid #ff6b6b;
+        }
+
+        /* Enhanced Syntax Highlighting */
+        .keyword { color: #569cd6; font-weight: 500; }
+        .string { color: #ce9178; }
+        .comment { color: #6a9955; font-style: italic; }
+        .function { color: #dcdcaa; }
+        .variable { color: #9cdcfe; }
+        .operator { color: #d4d4d4; }
+        .number { color: #b5cea8; }
+        .property { color: #92c5f7; }
+        .type { color: #4ec9b0; }
+        .tag { color: #569cd6; }
+        .attribute { color: #92c5f7; }
+
+        /* AI Suggestion */
+        .ai-suggestion {
+            opacity: 0.5;
+            color: #666;
+            font-style: italic;
+            position: relative;
+        }
+
+        .ai-suggestion::before {
+            content: "✨ AI";
+            position: absolute;
+            left: -40px;
+            top: 0;
+            font-size: 10px;
+            color: #4ecdc4;
+            background: rgba(78, 205, 196, 0.1);
+            padding: 2px 4px;
+            border-radius: 2px;
+        }
+
+        /* Minimap */
+        .minimap {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 80px;
+            height: 100%;
+            background: #252526;
+            border-left: 1px solid #333;
+            overflow: hidden;
+        }
+
+        .minimap-line {
+            height: 2px;
+            margin: 1px 0;
+            background: #404040;
+            border-radius: 1px;
+        }
+
+        .minimap-line.code {
+            background: #4ecdc4;
+            opacity: 0.6;
+        }
+
+        .minimap-line.comment {
+            background: #6a9955;
+            opacity: 0.4;
+        }
+
+        /* Status Bar */
+        .status-bar {
+            background: #007acc;
+            padding: 4px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 12px;
+            color: white;
+        }
+
+        .status-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .status-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .status-icon {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .status-icon.success { background: #28ca42; }
+        .status-icon.warning { background: #ffbd2e; }
+        .status-icon.error { background: #ff5f57; }
+
+        /* Animations */
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        .typing-animation {
+            animation: typing 3s steps(40, end);
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 1s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .editor-container {
+                margin: 1rem;
+            }
+            
+            .tab-container {
+                display: none;
+            }
+            
+            .minimap {
+                display: none;
+            }
+            
+            .code-content {
+                padding-left: 60px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -524,41 +972,142 @@
             </div>
         </section>
 
-        <section class="code-preview">
-            <div class="container">
-                <h2 class="section-title fade-in">Theia - Nexor lenguaje de alto nivel</h2>
-                <div class="code-window fade-in">
-                    <div class="code-header">
-                        <div class="code-dots">
-                            <div class="dot red"></div>
-                            <div class="dot yellow"></div>
-                            <div class="dot green"></div>
+    <section class="code-preview">
+        <div class="container">
+            <h2 class="section-title fade-in">Experiencia de Código Superior</h2>
+            <div class="editor-container fade-in">
+                <div class="editor-header">
+                    <div class="editor-controls">
+                        <div class="window-controls">
+                            <div class="control-btn close"></div>
+                            <div class="control-btn minimize"></div>
+                            <div class="control-btn maximize"></div>
                         </div>
-                        <div class="code-title">programa.nx - Theia</div>
+                        <div class="tab-container">
+                            <div class="tab active">
+                                <div class="file-icon js">JS</div>
+                                <span>main.js</span>
+                                <div class="tab-close">×</div>
+                            </div>
+                            <div class="tab">
+                                <div class="file-icon vue">V</div>
+                                <span>App.vue</span>
+                                <div class="tab-close">×</div>
+                            </div>
+                            <div class="tab">
+                                <div class="file-icon css">CSS</div>
+                                <span>styles.css</span>
+                                <div class="tab-close">×</div>
+                            </div>
+                        </div>
                     </div>
+                </div>
+
+                <div class="editor-toolbar">
+                    <div class="breadcrumb">
+                        <span>src</span>
+                        <span class="breadcrumb-separator">/</span>
+                        <span>components</span>
+                        <span class="breadcrumb-separator">/</span>
+                        <span>main.js</span>
+                    </div>
+                </div>
+
+                <div style="position: relative;">
+                    <div class="line-numbers">
+                        <div class="line-number">1</div>
+                        <div class="line-number">2</div>
+                        <div class="line-number">3</div>
+                        <div class="line-number">4</div>
+                        <div class="line-number active">5</div>
+                        <div class="line-number">6</div>
+                        <div class="line-number">7</div>
+                        <div class="line-number">8</div>
+                        <div class="line-number">9</div>
+                        <div class="line-number">10</div>
+                        <div class="line-number">11</div>
+                        <div class="line-number">12</div>
+                        <div class="line-number">13</div>
+                        <div class="line-number">14</div>
+                        <div class="line-number">15</div>
+                        <div class="line-number">16</div>
+                        <div class="line-number">17</div>
+                        <div class="line-number">18</div>
+                        <div class="line-number">19</div>
+                        <div class="line-number">20</div>
+                        <div class="line-number">21</div>
+                        <div class="line-number">22</div>
+                        <div class="line-number">23</div>
+                        <div class="line-number">24</div>
+                        <div class="line-number">25</div>
+                        <div class="line-number">26</div>
+                        <div class="line-number">27</div>
+                        <div class="line-number">28</div>
+                        <div class="line-number">29</div>
+                        <div class="line-number">31</div>
+                        <div class="line-number">32</div>
+                        <div class="line-number">End</div>
+                    </div>
+
                     <div class="code-content">
-                        <div class="code-line"><span class="comment">@ Vamos animate a dar el pirmer paso al futuro</span></div>
-                        <div class="code-line"><span class="keyword">imp</span> <span class="function">decimal</span><span class="keyword"></span> <span class="string">ble x = 0.2</span></div>
-                        <div class="code-line"><span class="keyword">ble y = 0.1</span> <span class="function"></span> <span class="keyword"></span> <span class="string">ble z= y+x</span></div>
+                        <div class="code-line"><span class="comment">// Bienvenido a Theia - El futuro de la programación</span></div>
+                        <div class="code-line"><span class="keyword">import</span> { <span class="function">createApp</span>, <span class="function">ref</span>, <span class="function">computed</span> } <span class="keyword">from</span> <span class="string">'vue'</span></div>
+                        <div class="code-line"><span class="keyword">import</span> <span class="type">App</span> <span class="keyword">from</span> <span class="string">'./App.vue'</span></div>
+                        <div class="code-line"><span class="keyword">import</span> <span class="string">'./styles/main.css'</span></div>
+                        <div class="code-line highlight"></div>
+                        <div class="code-line"><span class="comment">// Configuración avanzada con Theia AI</span></div>
+                        <div class="code-line"><span class="keyword">const</span> <span class="variable">app</span> <span class="operator">=</span> <span class="function">createApp</span>(<span class="type">App</span>)</div>
                         <div class="code-line"></div>
-                        <div class="code-line"><span class="keyword">vek</span> <span class="function">z</span> = <span class="function"></span><span class="function"></span></div>
+                        <div class="code-line"><span class="comment">// Plugin de autocompletado inteligente</span></div>
+                        <div class="code-line"><span class="variable">app</span>.<span class="property">config</span>.<span class="property">globalProperties</span>.<span class="property">$theia</span> <span class="operator">=</span> {</div>
+                        <div class="code-line">  <span class="property">version</span>: <span class="string">'v2.9.3'</span>,</div>
+                        <div class="code-line">  <span class="property">ai</span>: {</div>
+                        <div class="code-line">    <span class="property">enabled</span>: <span class="keyword">true</span>,</div>
+                        <div class="code-line">    <span class="property">model</span>: <span class="string">'gpt-4-turbo'</span>,</div>
+                        <div class="code-line">    <span class="property">suggestions</span>: <span class="keyword">true</span></div>
+                        <div class="code-line">  },</div>
+                        <div class="code-line">  <span class="property">theme</span>: <span class="string">'dark-professional'</span>,</div>
+                        <div class="code-line">  <span class="property">performance</span>: <span class="string">'optimized'</span></div>
+                        <div class="code-line">}</div>
+                        <div class="code-line ai-suggestion"><span class="comment">// Sugerencia AI: Añadir validación de entorno</span></div>
                         <div class="code-line"></div>
-                        <div class="code-line"><span class="comment">@ Versión de Nexor</span></div>
-                        <div class="code-line"><span class="function"></span><span class="function"></span><span class="function"></span><span class="function"></span></div>
-                        <div class="code-line">  <span class="function">version</span>: <span class="string">'2.9.3'</span>,</div>
-                        <div class="code-line">  <span class="function">rep</span>3: <span class="keyword">ion</span>,</div>
-                        <div class="code-line">  <span class="function">theme</span>: <span class="string">'Hernández'</span></div>
-                        <div class="code-line"></div>
-                        <div class="code-line"></div>
-                        <div class="code-line"><span class="function"></span><span class="function"></span><span class="string"></span></div>
+                        <div class="code-line"><span class="variable">app</span>.<span class="function">mount</span>(<span class="string">'#app'</span>)</div>
+                    </div>
+                </div>
+
+                <div class="status-bar">
+                    <div class="status-left">
+                        <div class="status-indicator">
+                            <div class="status-icon success"></div>
+                            <span>JavaScript</span>
+                        </div>
+                        <div class="status-indicator">
+                            <span>UTF-8</span>
+                        </div>
+                        <div class="status-indicator">
+                            <span>Ln 5, Col 12</span>
+                        </div>
+                    </div>
+                    <div class="status-right">
+                        <div class="status-indicator">
+                            <div class="status-icon success"></div>
+                            <span>Git: main</span>
+                        </div>
+                        <div class="status-indicator">
+                            <span>AI: Active</span>
+                        </div>
+                        <div class="status-indicator">
+                            <span>Theia 2.1.0</span>
+                        </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
         <section class="download" id="descargar">
             <div class="container">
-                <h2 class="section-title fade-in">Descarga Theia</h2>
+                <h2 class="section-title fade-in">Descarga Xedron</h2>
                 <p class="fade-in">Disponible para todas las plataformas. Gratis y de código abierto.</p>
                 <div class="download-grid">
                     <div class="download-card fade-in">
@@ -589,22 +1138,16 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>Producto</h3>
-                    <a href="https://emiliano-hn.github.io/Dynatrix-Systems/">Características</a>
-                    <a href="https://emiliano-hn.github.io/Dynatrix-Systems/#productos">Descargas</a>
+                    <a href="file:///C:/Users/Emiliano/Downloads/Trabajo/Trabajo/Dynatrix%20Systems/Theia.html#caracteristicas">Características</a>
                     <a href="https://emiliano-hn.github.io/Dynatrix-Systems/">Documentación</a>
+                    <a href="file:///C:/Users/Emiliano/Downloads/Trabajo/Trabajo/Dynatrix%20Systems/Theia.html#descargar">Descargas</a>
                     <a href="https://emiliano-hn.github.io/Dynatrix-Systems/">API</a>
                 </div>
                 <div class="footer-section">
-                    <h3>Soporte</h3>
-                    <a href="https://emiliano-hn.github.io/Dynatrix-Systems/">Centro de Ayuda</a>
-                    <a href="https://emiliano-hn.github.io/Dynatrix-Systems/">Comunidad</a>
-                    <a href="https://emiliano-hn.github.io/Dynatrix-Systems/">Reportar Bug</a>
-                    <a href="https://emiliano-hn.github.io/Dynatrix-Systems/">Contacto</a>
-                </div>
-                <div class="footer-section">
                     <h3>Empresa</h3>
-                    <a href="https://emiliano-hn.github.io/Dynatrix-Systems/">Dynatrix Systems</a>
-                    <a href="https://emiliano-hn.github.io/Dynatrix-Systems/nosotros.html">Firewall DevCode</a>
+                    <a href="https://emiliano-hn.github.io/Dynatrix-Systems/nosotros.html">Dynatrix Systems</a>
+                    <a href="https://emiliano-hn.github.io/Dynatrix-Systems/nosotros.html#equipo">Firewall DevCode</a>
+                    <a href="https://emiliano-hn.github.io/Dynatrix-Systems/">Pagina oficial</a>
                     <a href="https://emiliano-hn.github.io/Dynatrix-Systems/prensa.html">Prensa</a>
                 </div>
             </div>
