@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hacker Search - Advanced Terminal Search Tool</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+            color: #00ff41;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.1;
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 30px 0;
+            border-bottom: 2px solid #00ff41;
+            position: relative;
+        }
+        
+        .logo {
+            font-size: 3em;
+            font-weight: bold;
+            text-shadow: 0 0 20px #00ff41, 0 0 40px #00ff41;
+            margin-bottom: 10px;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { text-shadow: 0 0 20px #00ff41, 0 0 30px #00ff41; }
+            to { text-shadow: 0 0 30px #00ff41, 0 0 40px #00ff41, 0 0 50px #00ff41; }
+        }
+        
+        .subtitle {
+            font-size: 1.2em;
+            color: #888;
+            margin-bottom: 20px;
+        }
+        
+        .version {
+            background: rgba(0, 255, 65, 0.1);
+            border: 1px solid #00ff41;
+            padding: 5px 15px;
+            border-radius: 20px;
+            display: inline-block;
+            font-size: 0.9em;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        
+        .info-panel, .download-panel {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid #00ff41;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .info-panel:hover, .download-panel:hover {
+            box-shadow: 0 0 30px rgba(0, 255, 65, 0.4);
+            transform: translateY(-5px);
+        }
+        
+        .panel-title {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            color: #00ff41;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+        }
+        
+        .feature-list {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+        
+        .feature-list li {
+            margin: 10px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .feature-list li:before {
+            content: "➤";
+            position: absolute;
+            left: 0;
+            color: #00ff41;
+        }
+        
+        .download-btn {
+            background: linear-gradient(45deg, #00ff41, #00cc33);
+            color: #000;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1em;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .download-btn:hover {
+            background: linear-gradient(45deg, #00cc33, #00ff41);
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 255, 65, 0.4);
+        }
+        
+        .download-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .file-info {
+            background: rgba(0, 0, 0, 0.5);
+            border-left: 3px solid #00ff41;
+            padding: 15px;
+            margin: 15px 0;
+            font-size: 0.9em;
+        }
+        
+        .terminal-demo {
+            background: #000;
+            border: 1px solid #00ff41;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 30px 0;
+            font-family: 'Courier New', monospace;
+            position: relative;
+        }
+        
+        .terminal-header {
+            color: #00ff41;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 5px;
+        }
+        
+        .terminal-line {
+            margin: 5px 0;
+            animation: typewriter 2s steps(50) forwards;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        
+        @keyframes typewriter {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        
+        .prompt {
+            color: #ff0040;
+        }
+        
+        .command {
+            color: #00ff41;
+        }
+        
+        .output {
+            color: #ffff00;
+        }
+        
+        .specs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .spec-item {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid #333;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        
+        .spec-label {
+            color: #888;
+            font-size: 0.9em;
+            margin-bottom: 5px;
+        }
+        
+        .spec-value {
+            color: #00ff41;
+            font-weight: bold;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 30px 0;
+            border-top: 1px solid #333;
+            color: #666;
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .logo {
+                font-size: 2em;
+            }
+            
+            .specs {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .warning {
+            background: rgba(255, 0, 0, 0.1);
+            border: 1px solid #ff0040;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 20px 0;
+            color: #ff6666;
+        }
+        
+        .warning-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #ff0040;
+        }
+    </style>
+</head>
+<body>
+    <div class="matrix-bg" id="matrixBg"></div>
+    
+    <div class="container">
+        <header class="header">
+            <div class="logo">Hacker Search</div>
+            <div class="subtitle">Advanced Terminal Search Tool for Penetration Testing</div>
+            <div class="version">v2.1.3 - Stable Release</div>
+        </header>
+        
+        <div class="main-content">
+            <div class="info-panel">
+                <h2 class="panel-title">🔍 Características</h2>
+                <ul class="feature-list">
+                    <li>Búsqueda avanzada de vulnerabilidades</li>
+                    <li>Integración con bases de datos CVE</li>
+                    <li>Escaneo de puertos silencioso</li>
+                    <li>Detección de servicios activos</li>
+                    <li>Exportación de resultados (JSON/XML)</li>
+                    <li>Modo stealth para evasión</li>
+                    <li>Búsqueda de exploits en tiempo real</li>
+                    <li>Compatible con Metasploit</li>
+                </ul>
+                
+                <div class="warning">
+                    <div class="warning-title">⚠️ DISTRIBUCIÓN EXCLUSIVA</div>
+                    Hacker Search SOLO está disponible desde este sitio oficial de Dynatrix System. No se distribuye en ningún otro repositorio o plataforma. Cualquier otra fuente es no oficial y potencialmente peligrosa.
+                </div>
+            </div>
+            
+            <div class="download-panel">
+                <h2 class="panel-title">📥 Descargar para Kali Linux</h2>
+                
+                <div style="background: rgba(255, 215, 0, 0.1); border: 1px solid #ffd700; border-radius: 5px; padding: 15px; margin-bottom: 20px; color: #ffd700; text-align: center;">
+                    <strong>🏢 DYNATRIX SYSTEM - DISTRIBUCIÓN OFICIAL</strong><br>
+                    <small>La única fuente autorizada para Hacker Search</small>
+                </div>
+                
+                <button class="download-btn" onclick="downloadFile('deb')">
+                    📦 Descargar .DEB Package
+                </button>
+                
+                <button class="download-btn" onclick="downloadFile('tar')">
+                    🗜️ Descargar TAR.GZ Archive
+                </button>
+                
+                <button class="download-btn" onclick="downloadFile('git')">
+                    🔗 Clonar desde Git
+                </button>
+                
+                <div class="file-info">
+                    <strong>Información del archivo:</strong><br>
+                    Tamaño: 18.3 MB<br>
+                    SHA256: hx94k2p7m8n5...<br>
+                    Firma Digital: Dynatrix System<br>
+                    Última actualización: 28 Jun 2025
+                </div>
+                
+                <h3 style="color: #00ff41; margin-top: 30px;">⚡ Instalación Rápida</h3>
+                <div class="terminal-demo">
+                    <div class="terminal-header">root@kali:~#</div>
+                    <div class="terminal-line">
+                        <span class="prompt">$</span> 
+                        <span class="command">wget https://download.dynatrix.com/hackersearch_2.1.3.deb</span>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="prompt">$</span> 
+                        <span class="command">sudo dpkg -i hackersearch_2.1.3.deb</span>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="prompt">$</span> 
+                        <span class="command">hackersearch --help</span>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="output">Hacker Search v2.1.3 by Dynatrix System - Ready!</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="specs">
+            <div class="spec-item">
+                <div class="spec-label">Sistema Operativo</div>
+                <div class="spec-value">Kali Linux 2024.x+</div>
+            </div>
+            <div class="spec-item">
+                <div class="spec-label">Arquitectura</div>
+                <div class="spec-value">x86_64 / ARM64</div>
+            </div>
+            <div class="spec-item">
+                <div class="spec-label">Dependencias</div>
+                <div class="spec-value">Python 3.9+, nmap</div>
+            </div>
+            <div class="spec-item">
+                <div class="spec-label">Licencia</div>
+                <div class="spec-value">GPL v3.0</div>
+            </div>
+        </div>
+        
+        <footer class="footer">
+            <p>© 2025 Dynatrix System | Hacker Search - Distribución Oficial Exclusiva</p>
+            <p>Soporte técnico: support@dynatrix.com | Solo disponible desde este sitio</p>
+        </footer>
+    </div>
+    
+    <script>
+        // Efecto Matrix en el fondo
+        function createMatrixEffect() {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            document.getElementById('matrixBg').appendChild(canvas);
+            
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()";
+            const charArray = chars.split("");
+            const fontSize = 14;
+            const columns = canvas.width / fontSize;
+            const drops = [];
+            
+            for(let x = 0; x < columns; x++) {
+                drops[x] = 1;
+            }
+            
+            function draw() {
+                ctx.fillStyle = 'rgba(15, 15, 35, 0.05)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                ctx.fillStyle = '#00ff41';
+                ctx.font = fontSize + 'px monospace';
+                
+                for(let i = 0; i < drops.length; i++) {
+                    const text = charArray[Math.floor(Math.random() * charArray.length)];
+                    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                    
+                    if(drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                        drops[i] = 0;
+                    }
+                    drops[i]++;
+                }
+            }
+            
+            setInterval(draw, 35);
+        }
+        
+        createMatrixEffect();
+        
+        // Función de descarga simulada
+        function downloadFile(type) {
+            const messages = {
+                'deb': '📦 Iniciando descarga exclusiva desde Dynatrix System...',
+                'tar': '🗜️ Descargando archivo oficial TAR.GZ...',
+                'git': '🔗 Acceso al repositorio privado de Dynatrix...'
+            };
+            
+            alert(messages[type]);
+            
+            // Aquí normalmente se iniciaría la descarga real
+            if(type === 'git') {
+                // Simular acceso al repositorio privado
+                console.log('Accediendo al repositorio privado de Dynatrix System...');
+            } else {
+                // Simular descarga exclusiva
+                console.log('Descargando desde servidor oficial de Dynatrix...');
+            }
+        }
+        
+        // Efecto de typing en el terminal
+        document.addEventListener('DOMContentLoaded', function() {
+            const terminalLines = document.querySelectorAll('.terminal-line');
+            terminalLines.forEach((line, index) => {
+                line.style.animationDelay = (index * 0.8) + 's';
+            });
+        });
+        
+        // Responsive canvas
+        window.addEventListener('resize', function() {
+            const canvas = document.querySelector('canvas');
+            if(canvas) {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+        });
+    </script>
+</body>
+</html>
