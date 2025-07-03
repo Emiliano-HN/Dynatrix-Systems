@@ -395,31 +395,33 @@
         
         // Función de descarga simulada
         function downloadFile(type) {
-            const messages = {
-                'deb': '📦 Iniciando descarga exclusiva desde Dynatrix System...',
-                'tar': '🗜️ Descargando archivo oficial TAR.GZ...',
-                'git': '🔗 Acceso al repositorio privado de Dynatrix...'
-            };
-            
-            alert(messages[type]);
-            
-            // Aquí normalmente se iniciaría la descarga real
-            if(type === 'git') {
-                // Simular acceso al repositorio privado
-                console.log('Accediendo al repositorio privado de Dynatrix System...');
-            } else {
-                // Simular descarga exclusiva
-                console.log('Descargando desde servidor oficial de Dynatrix...');
-            }
-        }
-        
-        // Efecto de typing en el terminal
-        document.addEventListener('DOMContentLoaded', function() {
-            const terminalLines = document.querySelectorAll('.terminal-line');
-            terminalLines.forEach((line, index) => {
-                line.style.animationDelay = (index * 0.8) + 's';
-            });
-        });
+    const messages = {
+        'deb': '📦 Iniciando descarga exclusiva desde Dynatrix System...',
+        'tar': '🗜️ Descargando archivo oficial TAR.GZ...',
+        'git': '🔗 Acceso al repositorio privado de Dynatrix...'
+    };
+
+    alert(messages[type]);
+
+    if (type === 'git') {
+        console.log('Accediendo al repositorio privado de Dynatrix System...');
+    } else if (type === 'deb') {
+        // Simular descarga real de un .py
+        const contenido = `print("Bienvenido a Dynatrix Systems")\nprint("Este es un archivo generado desde la web")`;
+        const blob = new Blob([contenido], { type: 'text/x-python' });
+        const url = URL.createObjectURL(blob);
+
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'Hacker search.py';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    } else {
+        console.log('Descargando desde servidor oficial de Dynatrix...');
+    }
+}
         
         // Responsive canvas
         window.addEventListener('resize', function() {
