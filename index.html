@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dynatrix Systems - Ciberseguridad</title>
+    <title>Dynatrix Systems - Herramientas de Hacking Ético</title>
     <link rel="icon" href="imagenes/logo.png" type="image/png">
     <style>
         * {
@@ -16,7 +16,7 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
             min-height: 100vh;
         }
 
@@ -27,14 +27,15 @@
         }
 
         header {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(0, 0, 0, 0.9);
             backdrop-filter: blur(10px);
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 20px rgba(0, 255, 0, 0.1);
             transition: all 0.3s ease;
+            border-bottom: 1px solid #00ff00;
         }
 
         nav {
@@ -47,10 +48,11 @@
         .logo {
             font-size: 2rem;
             font-weight: bold;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, #00ff00, #00cc00);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            text-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
         }
 
         .nav-links {
@@ -61,14 +63,16 @@
 
         .nav-links a {
             text-decoration: none;
-            color: #333;
+            color: #00ff00;
             font-weight: 500;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
             position: relative;
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
         }
 
         .nav-links a:hover {
-            color: #667eea;
+            color: #ffffff;
+            text-shadow: 0 0 15px rgba(0, 255, 0, 0.8);
         }
 
         .nav-links a::after {
@@ -78,8 +82,9 @@
             height: 2px;
             bottom: -5px;
             left: 0;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, #00ff00, #00cc00);
             transition: width 0.3s ease;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
         }
 
         .nav-links a:hover::after {
@@ -93,7 +98,7 @@
         .hero {
             text-align: center;
             padding: 8rem 0 6rem;
-            color: white;
+            color: #00ff00;
             position: relative;
             overflow: hidden;
         }
@@ -105,13 +110,13 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>') repeat;
-            animation: float 20s ease-in-out infinite;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(0,255,0,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>') repeat;
+            animation: matrixRain 20s linear infinite;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
+        @keyframes matrixRain {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-100px); }
         }
 
         .hero-content {
@@ -122,7 +127,8 @@
         .hero h1 {
             font-size: 4rem;
             margin-bottom: 1rem;
-            animation: fadeInUp 1s ease;
+            animation: glitchText 3s ease-in-out infinite alternate;
+            text-shadow: 0 0 30px rgba(0, 255, 0, 0.8);
         }
 
         .hero p {
@@ -130,25 +136,36 @@
             margin-bottom: 2rem;
             opacity: 0.9;
             animation: fadeInUp 1s ease 0.2s both;
+            color: #ffffff;
         }
 
         .cta-button {
             display: inline-block;
             padding: 1rem 2rem;
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
+            background: rgba(0, 255, 0, 0.2);
+            color: #00ff00;
             text-decoration: none;
-            border-radius: 50px;
+            border-radius: 5px;
             font-weight: bold;
-            border: 2px solid rgba(255, 255, 255, 0.3);
+            border: 2px solid #00ff00;
             transition: all 0.3s ease;
             animation: fadeInUp 1s ease 0.4s both;
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
         }
 
         .cta-button:hover {
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(0, 255, 0, 0.3);
             transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 255, 0, 0.5);
+            color: #ffffff;
+        }
+
+        @keyframes glitchText {
+            0%, 100% { text-shadow: 0 0 30px rgba(0, 255, 0, 0.8); }
+            25% { text-shadow: 2px 0 0 #ff0000, -2px 0 0 #00ff00; }
+            50% { text-shadow: 0 0 30px rgba(0, 255, 0, 0.8); }
+            75% { text-shadow: -2px 0 0 #ff0000, 2px 0 0 #00ff00; }
         }
 
         @keyframes fadeInUp {
@@ -163,7 +180,7 @@
         }
 
         .products {
-            background: white;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
             padding: 6rem 0;
             position: relative;
         }
@@ -172,8 +189,9 @@
             text-align: center;
             font-size: 3rem;
             margin-bottom: 3rem;
-            color: #333;
+            color: #00ff00;
             position: relative;
+            text-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
         }
 
         .section-title::after {
@@ -184,8 +202,9 @@
             transform: translateX(-50%);
             width: 80px;
             height: 4px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, #00ff00, #00cc00);
             border-radius: 2px;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
         }
 
         .products-grid {
@@ -196,13 +215,14 @@
         }
 
         .product-card {
-            background: white;
+            background: rgba(0, 0, 0, 0.8);
             padding: 3rem;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            border: 1px solid rgba(0, 255, 0, 0.3);
         }
 
         .product-card::before {
@@ -211,42 +231,46 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 5px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            height: 3px;
+            background: linear-gradient(135deg, #00ff00, #00cc00);
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
         }
 
         .product-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 30px 60px rgba(0, 255, 0, 0.2);
+            border-color: #00ff00;
         }
 
         .product-icon {
             width: 80px;
             height: 80px;
-            border-radius: 20px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 10px;
+            background: linear-gradient(135deg, #00ff00, #00cc00);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 2rem;
-            color: white;
+            color: #000000;
             margin-bottom: 2rem;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
         }
 
         .product-card h3 {
             font-size: 1.8rem;
             margin-bottom: 1rem;
-            color: #333;
+            color: #00ff00;
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
         }
 
         .product-card p {
-            color: #666;
+            color: #cccccc;
             line-height: 1.8;
         }
 
         .innovation {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #00ff00;
             padding: 6rem 0;
             text-align: center;
         }
@@ -260,6 +284,16 @@
 
         .stat {
             text-align: center;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            border: 1px solid rgba(0, 255, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .stat:hover {
+            border-color: #00ff00;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
         }
 
         .stat-number {
@@ -267,10 +301,11 @@
             font-weight: bold;
             margin-bottom: 0.5rem;
             display: block;
+            text-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
         }
 
         .contact {
-            background: white;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
             padding: 6rem 0;
             text-align: center;
         }
@@ -278,10 +313,11 @@
         .contact-form {
             max-width: 600px;
             margin: 0 auto;
-            background: #f8f9fa;
+            background: rgba(0, 0, 0, 0.8);
             padding: 3rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(0, 255, 0, 0.3);
         }
 
         .form-group {
@@ -293,47 +329,52 @@
             display: block;
             margin-bottom: 0.5rem;
             font-weight: 500;
-            color: #333;
+            color: #00ff00;
         }
 
         .form-group input,
         .form-group textarea {
             width: 100%;
             padding: 1rem;
-            border: 2px solid #e9ecef;
-            border-radius: 10px;
+            border: 2px solid rgba(0, 255, 0, 0.3);
+            border-radius: 5px;
             font-size: 1rem;
             transition: border-color 0.3s ease;
+            background: rgba(0, 0, 0, 0.7);
+            color: #ffffff;
         }
 
         .form-group input:focus,
         .form-group textarea:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: #00ff00;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
         }
 
         .submit-btn {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
+            background: linear-gradient(135deg, #00ff00, #00cc00);
+            color: #000000;
             padding: 1rem 3rem;
             border: none;
-            border-radius: 50px;
+            border-radius: 5px;
             font-size: 1.1rem;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
         }
 
         .submit-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 10px 30px rgba(0, 255, 0, 0.5);
         }
 
         footer {
-            background: #2c3e50;
-            color: white;
+            background: #000000;
+            color: #00ff00;
             text-align: center;
             padding: 3rem 0;
+            border-top: 1px solid rgba(0, 255, 0, 0.3);
         }
 
         .footer-content {
@@ -345,11 +386,12 @@
 
         .footer-section h4 {
             margin-bottom: 1rem;
-            color: #667eea;
+            color: #00ff00;
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
         }
 
         .footer-section a {
-            color: #bdc3c7;
+            color: #cccccc;
             text-decoration: none;
             display: block;
             margin-bottom: 0.5rem;
@@ -357,7 +399,31 @@
         }
 
         .footer-section a:hover {
-            color: white;
+            color: #00ff00;
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+        }
+
+        .terminal-window {
+            background: #000000;
+            border: 1px solid #00ff00;
+            border-radius: 5px;
+            margin: 2rem 0;
+            overflow: hidden;
+        }
+
+        .terminal-header {
+            background: #00ff00;
+            color: #000000;
+            padding: 0.5rem 1rem;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .terminal-body {
+            padding: 1rem;
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            line-height: 1.4;
         }
 
         @media (max-width: 768px) {
@@ -390,11 +456,11 @@
 <body>
     <header>
         <nav class="container">
-            <div class="logo">Dynatrix Systems</div>
+            <div class="logo">🔐 Dynatrix Systems</div>
             <ul class="nav-links">
                 <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#productos">Productos</a></li>
-                <li><a href="#innovacion">Innovación</a></li>
+                <li><a href="#herramientas">Herramientas</a></li>
+                <li><a href="#investigacion">Investigación</a></li>
                 <li><a href="#contacto">Contacto</a></li>
             </ul>
         </nav>
@@ -405,92 +471,154 @@
             <div class="container">
                 <div class="hero-content">
                     <h1>Dynatrix Systems</h1>
-                    <p>Las mejores herramientas de hacking ético</p></p>
-                    <a href="#productos" class="cta-button">Descubre Nuestras herramientas</a>
+                    <p>Herramientas avanzadas de hacking ético y pentesting</p>
+                    <div class="terminal-window">
+                        <div class="terminal-header">root@dynatrix:~#</div>
+                        <div class="terminal-body">
+                            ./ethical_hacking_toolkit --scan --analyze --secure<br>
+                            [✓] Inicializando herramientas de pentesting...<br>
+                            [✓] Cargando módulos de reconocimiento...<br>
+                            [✓] Sistemas listos para auditoria ética
+                        </div>
+                    </div>
+                    <a href="#herramientas" class="cta-button">Explorar Herramientas</a>
                 </div>
             </div>
         </section>
 
-        <section id="productos" class="products">
+        <section id="herramientas" class="products">
             <div class="container">
-                <h2 class="section-title">Herramientas</h2>
+                <h2 class="section-title">Arsenal de Herramientas</h2>
                 <div class="products-grid">
                     <div class="product-card">
-                        <img class="product-icon" src="imagenes/Hacker search.png" alt="💀">
+                        <div class="product-icon">🔍</div>
                         <h3>Hacker Search</h3>
-                        <p>Es una herramienta que facilita la búsqueda en motores de búsqueda directamente desde la terminal. Permite al usuario consultar cualquier cosa en navegadores web de forma rápida, además de contar con un historial integrado para acceder fácilmente a búsquedas anteriores. Con ella, puedes buscar lo que quieras sin necesidad de abrir manualmente un navegador.</p>
+                        <p>Herramienta de reconocimiento avanzada que facilita la búsqueda de información desde la terminal. Incluye OSINT, búsqueda de subdominios, análisis de metadatos y un historial completo de investigaciones para pentesting profesional.</p>
                     </div>
                     <div class="product-card">
-                        <img class="product-icon" src="imagenes/" alt="🧬">
-                        <h3></h3>
-                        <p>.</p>
+                        <div class="product-icon">🛡️</div>
+                        <h3>VulnScan Pro</h3>
+                        <p>Escáner de vulnerabilidades automatizado que identifica fallas de seguridad en aplicaciones web, redes y sistemas. Incluye reportes detallados y recomendaciones de remediación siguiendo estándares OWASP.</p>
                     </div>
                     <div class="product-card">
-                        <img class="product-icon" src="imagenes/" alt="👨‍💻">
-                        <h3></h3>
-                        <p></p>
+                        <div class="product-icon">💻</div>
+                        <h3>NetPentester</h3>
+                        <p>Suite completa de herramientas para pentesting de redes. Incluye port scanning, detección de servicios, análisis de protocolos y explotación controlada de vulnerabilidades en entornos autorizados.</p>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-icon">🔓</div>
+                        <h3>AuthBypass Kit</h3>
+                        <p>Conjunto de herramientas especializadas en pruebas de autenticación y autorización. Incluye técnicas de bypass, análisis de tokens, fuzzing de login y evaluación de controles de acceso.</p>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-icon">📊</div>
+                        <h3>ReportGen</h3>
+                        <p>Generador automatizado de reportes de pentesting profesionales. Crea documentación técnica detallada, resúmenes ejecutivos y recomendaciones de seguridad con métricas y evidencias.</p>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-icon">🌐</div>
+                        <h3>WebApp Analyzer</h3>
+                        <p>Analizador especializado en aplicaciones web que detecta vulnerabilidades como SQL injection, XSS, CSRF y más. Incluye crawling inteligente y análisis de código del lado cliente.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="innovacion" class="innovation">
+        <section id="investigacion" class="innovation">
             <div class="container">
-                <h2 class="section-title">Creando continua</h2>
-                <p style="font-size: 1.3rem; margin-bottom: 3rem; opacity: 0.9;">
-                    En Dynatrix Systems, no solo seguimos la ciberseguridad al dia, las creamos. Nuestro equipo de Firewall DevCode en ciberseguridad y desarrollo de clase mundial trabaja incansablemente para crear las herramientas que definirán el futuro de la cibersguridad.
+                <h2 class="section-title">Investigación Continua</h2>
+                <p style="font-size: 1.3rem; margin-bottom: 3rem; opacity: 0.9; color: #ffffff;">
+                    En Dynatrix Systems, desarrollamos las herramientas que los ethical hackers necesitan para mantenerse un paso adelante de las amenazas. Nuestro equipo de investigadores en ciberseguridad trabaja constantemente en nuevas técnicas y metodologías de pentesting.
                 </p>
                 <div class="stats">
                     <div class="stat">
-                        <span class="stat-number">30M+</span>
-                        <span>Ingenieros en Ciberseguridad Activos</span>
+                        <span class="stat-number">500K+</span>
+                        <span>Vulnerabilidades Detectadas</span>
                     </div>
                     <div class="stat">
-                        <span class="stat-number">195+</span>
-                        <span>Países</span>
+                        <span class="stat-number">95+</span>
+                        <span>Países Utilizando</span>
                     </div>
                     <div class="stat">
-                        <span class="stat-number">99.9%</span>
-                        <span>Tiempo de Actividad</span>
+                        <span class="stat-number">99.8%</span>
+                        <span>Precisión en Detección</span>
                     </div>
                     <div class="stat">
-                        <span class="stat-number">#1</span>
-                        <span>Líder Mundial</span>
+                        <span class="stat-number">24/7</span>
+                        <span>Investigación Activa</span>
                     </div>
                 </div>
             </div>
         </section>
 
-    <footer id="contacto">
+        <section id="contacto" class="contact">
+            <div class="container">
+                <h2 class="section-title">Contacto Seguro</h2>
+                <div class="contact-form">
+                    <form>
+                        <div class="form-group">
+                            <label for="nombre">Nombre Completo</label>
+                            <input type="text" id="nombre" name="nombre" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Seguro</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="organizacion">Organización</label>
+                            <input type="text" id="organizacion" name="organizacion">
+                        </div>
+                        <div class="form-group">
+                            <label for="mensaje">Consulta sobre Pentesting</label>
+                            <textarea id="mensaje" name="mensaje" rows="6" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Enviar Consulta Segura</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h4>Productos</h4>
-                    <a href="hacker search.html">Hacker Search</a>
-                    <a href=""></a>
-                    <a href="">Mas productos</a>
+                    <h4>Herramientas</h4>
+                    <a href="#">Hacker Search</a>
+                    <a href="#">VulnScan Pro</a>
+                    <a href="#">NetPentester</a>
+                    <a href="#">AuthBypass Kit</a>
                 </div>
                 <div class="footer-section">
-                    <h4>Empresa</h4>
-                    <a href="nosotros.html">Sobre Nosotros</a>
-                    <a href="prensa.html">Prensa</a>
-                    <a href="">Noticias</a>
+                    <h4>Recursos</h4>
+                    <a href="#">Documentación</a>
+                    <a href="#">Metodologías</a>
+                    <a href="#">Casos de Estudio</a>
+                    <a href="#">CVE Database</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Comunidad</h4>
+                    <a href="#">Bug Bounty</a>
+                    <a href="#">Foro de Ethical Hackers</a>
+                    <a href="#">Certificaciones</a>
+                    <a href="#">Eventos</a>
                 </div>
                 <div class="footer-section">
                     <h4>Contacto</h4>
-                    <a href="mailto:solutionscognitechdev@gmail.com">solutionscognitechdev@gmail.com</a>
-                    <a href="#">Ciudad de México, México</a>
-                    <a href="#">San Francisco, CA</a>
+                    <a href="mailto:security@dynatrix.com">security@dynatrix.com</a>
+                    <a href="#">📍 Ciudad de México, México</a>
+                    <a href="#">🔐 Comunicación Encriptada</a>
                 </div>
             </div>
-            <p style="border-top: 1px solid #34495e; padding-top: 2rem; margin-top: 2rem;">
-                © 2025 Dynatrix Systems. Líder mundial en Ciberseguridad. Todos los derechos reservados.
+            <p style="border-top: 1px solid rgba(0, 255, 0, 0.3); padding-top: 2rem; margin-top: 2rem;">
+                © 2025 Dynatrix Systems. Ethical Hacking & Penetration Testing Tools. Todos los derechos reservados.
             </p>
         </div>
     </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Smooth scrolling para navegación
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
@@ -504,14 +632,16 @@
                 });
             });
 
+            // Efecto parallax para el hero
             window.addEventListener('scroll', function() {
                 const scrolled = window.pageYOffset;
                 const hero = document.querySelector('.hero');
                 if (hero) {
-                    hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+                    hero.style.transform = `translateY(${scrolled * 0.3}px)`;
                 }
             });
 
+            // Animación de entrada para las tarjetas
             const observerOptions = {
                 threshold: 0.1,
                 rootMargin: '0px 0px -50px 0px'
@@ -529,13 +659,14 @@
             document.querySelectorAll('.product-card').forEach((card, index) => {
                 card.style.opacity = '0';
                 card.style.transform = 'translateY(50px)';
-                card.style.transition = `all 0.6s ease ${index * 0.2}s`;
+                card.style.transition = `all 0.6s ease ${index * 0.1}s`;
                 observer.observe(card);
             });
 
+            // Animación de contadores
             function animateCounter(element, target) {
                 let current = 0;
-                const increment = target / 100;
+                const increment = target / 50;
                 const timer = setInterval(() => {
                     current += increment;
                     if (current >= target) {
@@ -544,7 +675,7 @@
                     } else {
                         element.textContent = Math.floor(current) + (element.textContent.includes('+') ? '+' : element.textContent.includes('%') ? '%' : '');
                     }
-                }, 20);
+                }, 30);
             }
 
             const statsObserver = new IntersectionObserver(function(entries) {
@@ -552,12 +683,12 @@
                     if (entry.isIntersecting) {
                         const statNumber = entry.target.querySelector('.stat-number');
                         const text = statNumber.textContent;
-                        if (text.includes('M+')) {
-                            animateCounter(statNumber, 30);
-                        } else if (text.includes('195+')) {
-                            animateCounter(statNumber, 195);
-                        } else if (text.includes('99.9%')) {
-                            animateCounter(statNumber, 99.9);
+                        if (text.includes('K+')) {
+                            animateCounter(statNumber, 500);
+                        } else if (text.includes('95+')) {
+                            animateCounter(statNumber, 95);
+                        } else if (text.includes('99.8%')) {
+                            animateCounter(statNumber, 99.8);
                         }
                         statsObserver.unobserve(entry.target);
                     }
@@ -568,6 +699,7 @@
                 statsObserver.observe(stat);
             });
 
+            // Efectos de hover mejorados
             document.querySelectorAll('.cta-button, .submit-btn').forEach(button => {
                 button.addEventListener('mouseenter', function() {
                     this.style.transform = 'translateY(-3px) scale(1.05)';
@@ -578,26 +710,45 @@
                 });
             });
 
+            // Simulación de envío de formulario
             document.querySelector('form').addEventListener('submit', function(e) {
                 e.preventDefault();
                 const submitBtn = this.querySelector('.submit-btn');
                 const originalText = submitBtn.textContent;
                 
-                submitBtn.textContent = 'Enviando...';
+                submitBtn.textContent = 'Encriptando...';
                 submitBtn.disabled = true;
 
                 setTimeout(() => {
-                    submitBtn.textContent = '¡Enviado con Éxito!';
-                    submitBtn.style.background = 'linear-gradient(135deg, #4CAF50, #45a049)';
+                    submitBtn.textContent = '✓ Enviado de Forma Segura';
+                    submitBtn.style.background = 'linear-gradient(135deg, #00ff00, #008800)';
                     
                     setTimeout(() => {
                         submitBtn.textContent = originalText;
                         submitBtn.disabled = false;
-                        submitBtn.style.background = 'linear-gradient(135deg, #667eea, #764ba2)';
+                        submitBtn.style.background = 'linear-gradient(135deg, #00ff00, #00cc00)';
                         this.reset();
-                    }, 2000);
-                }, 1500);
+                    }, 3000);
+                }, 2000);
             });
+
+            // Efecto de texto en terminal
+            const terminalText = document.querySelector('.terminal-body');
+            if (terminalText) {
+                const originalText = terminalText.innerHTML;
+                terminalText.innerHTML = '';
+                
+                let i = 0;
+                function typeText() {
+                    if (i < originalText.length) {
+                        terminalText.innerHTML += originalText.charAt(i);
+                        i++;
+                        setTimeout(typeText, 50);
+                    }
+                }
+                
+                setTimeout(typeText, 1000);
+            }
         });
     </script>
 </body>
