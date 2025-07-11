@@ -456,7 +456,7 @@
 <body>
     <header>
         <nav class="container">
-            <div class="logo"> Dynatrix Systems</div>
+            <div class="logo">Dynatrix Systems</div>
             <ul class="nav-links">
                 <li><a href="#inicio">Inicio</a></li>
                 <li><a href="#herramientas">Herramientas</a></li>
@@ -481,9 +481,8 @@
             <div class="container">
                 <h2 class="section-title">Arsenal de Herramientas</h2>
                 <div class="products-grid">
-                        <div class="product-card">
-                           <img src="imaneges/Hacker search.png" alt="Icono de producto" width="24" height="24">
-                        </div>
+                    <div class="product-card">
+                        <div class="product-icon">🔍</div>
                         <h3>Hacker Search</h3>
                         <p>Herramienta de reconocimiento avanzada que facilita la búsqueda de información desde la terminal. Incluye OSINT, búsqueda de subdominios, análisis de metadatos y un historial completo de investigaciones para pentesting profesional.</p>
                     </div>
@@ -539,6 +538,29 @@
                         <span class="stat-number">24/7</span>
                         <span>Investigación Activa</span>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contacto" class="contact">
+            <div class="container">
+                <h2 class="section-title">Contacto Seguro</h2>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Nombre:</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Mensaje:</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Enviar Mensaje Seguro</button>
+                    </form>
                 </div>
             </div>
         </section>
@@ -676,26 +698,29 @@
             });
 
             // Simulación de envío de formulario
-            document.querySelector('form').addEventListener('submit', function(e) {
-                e.preventDefault();
-                const submitBtn = this.querySelector('.submit-btn');
-                const originalText = submitBtn.textContent;
-                
-                submitBtn.textContent = 'Encriptando...';
-                submitBtn.disabled = true;
-
-                setTimeout(() => {
-                    submitBtn.textContent = '✓ Enviado de Forma Segura';
-                    submitBtn.style.background = 'linear-gradient(135deg, #00ff00, #008800)';
+            const form = document.getElementById('contactForm');
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const submitBtn = this.querySelector('.submit-btn');
+                    const originalText = submitBtn.textContent;
                     
+                    submitBtn.textContent = 'Encriptando...';
+                    submitBtn.disabled = true;
+
                     setTimeout(() => {
-                        submitBtn.textContent = originalText;
-                        submitBtn.disabled = false;
-                        submitBtn.style.background = 'linear-gradient(135deg, #00ff00, #00cc00)';
-                        this.reset();
-                    }, 3000);
-                }, 2000);
-            });
+                        submitBtn.textContent = '✓ Enviado de Forma Segura';
+                        submitBtn.style.background = 'linear-gradient(135deg, #00ff00, #008800)';
+                        
+                        setTimeout(() => {
+                            submitBtn.textContent = originalText;
+                            submitBtn.disabled = false;
+                            submitBtn.style.background = 'linear-gradient(135deg, #00ff00, #00cc00)';
+                            this.reset();
+                        }, 3000);
+                    }, 2000);
+                });
+            }
 
             // Efecto de texto en terminal
             const terminalText = document.querySelector('.terminal-body');
