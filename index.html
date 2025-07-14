@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editorial Nexor - Libros Digitales Gratuitos desde 1850</title>
+    <title>Dynatrix Systems - Herramientas de Hacking Ético</title>
+    <link rel="icon" href="imagenes/logo.png" type="image/png">
     <style>
         * {
             margin: 0;
@@ -12,10 +13,10 @@
         }
 
         body {
-            font-family: 'Georgia', serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            color: #2c3e50;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #333;
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
             min-height: 100vh;
         }
 
@@ -25,425 +26,148 @@
             padding: 0 20px;
         }
 
-        /* Header */
         header {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(0, 0, 0, 0.9);
             backdrop-filter: blur(10px);
-            padding: 1rem 0;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 20px rgba(0, 255, 0, 0.1);
+            transition: all 0.3s ease;
+            border-bottom: 1px solid #00ff00;
         }
 
-        .header-content {
+        nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 1rem 0;
         }
 
         .logo {
-            font-size: 2.2rem;
-            font-weight: bold;
-            color: #1e3c72;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .logo::before {
-            content: "📚";
             font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #00ff00, #00cc00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
         }
 
-        .established {
-            font-size: 0.8rem;
-            color: #7f8c8d;
-            font-style: italic;
-        }
-
-        nav ul {
+        .nav-links {
             display: flex;
             list-style: none;
             gap: 2rem;
         }
 
-        nav a {
+        .nav-links a {
             text-decoration: none;
-            color: #2c3e50;
+            color: #00ff00;
             font-weight: 500;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
+            position: relative;
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
         }
 
-        nav a:hover {
-            color: #1e3c72;
+        .nav-links a:hover {
+            color: #ffffff;
+            text-shadow: 0 0 15px rgba(0, 255, 0, 0.8);
         }
 
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%23f8f9fa" width="1200" height="800"/><g fill="%23e9ecef" opacity="0.3"><path d="M100 100h150v600H100z"/><path d="M300 150h150v500H300z"/><path d="M500 200h150v400H500z"/><path d="M700 120h150v560H700z"/><path d="M900 180h150v440H900z"/></g></svg>');
-            background-size: cover;
-            background-position: center;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: linear-gradient(135deg, #00ff00, #00cc00);
+            transition: width 0.3s ease;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        main {
             margin-top: 80px;
         }
 
-        .hero-content h1 {
+        .hero {
+            text-align: center;
+            padding: 8rem 0 6rem;
+            color: #00ff00;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(0,255,0,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>') repeat;
+            animation: matrixRain 20s linear infinite;
+        }
+
+        @keyframes matrixRain {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-100px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
             font-size: 4rem;
             margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            animation: fadeInUp 1s ease-out;
+            animation: glitchText 3s ease-in-out infinite alternate;
+            text-shadow: 0 0 30px rgba(0, 255, 0, 0.8);
         }
 
-        .hero-content .subtitle {
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-            animation: fadeInUp 1s ease-out 0.3s both;
-            color: #f39c12;
-        }
-
-        .hero-content p {
-            font-size: 1.3rem;
+        .hero p {
+            font-size: 1.5rem;
             margin-bottom: 2rem;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-            animation: fadeInUp 1s ease-out 0.6s both;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.2s both;
+            color: #ffffff;
         }
 
         .cta-button {
             display: inline-block;
-            background: linear-gradient(45deg, #e74c3c, #c0392b);
-            color: white;
             padding: 1rem 2rem;
+            background: rgba(0, 255, 0, 0.2);
+            color: #00ff00;
             text-decoration: none;
-            border-radius: 50px;
+            border-radius: 5px;
             font-weight: bold;
-            font-size: 1.1rem;
+            border: 2px solid #00ff00;
             transition: all 0.3s ease;
-            animation: fadeInUp 1s ease-out 0.9s both;
+            animation: fadeInUp 1s ease 0.4s both;
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
         }
 
         .cta-button:hover {
+            background: rgba(0, 255, 0, 0.3);
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(231, 76, 60, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 255, 0, 0.5);
+            color: #ffffff;
         }
 
-        /* Main Content */
-        main {
-            background: white;
-            margin-top: -100px;
-            position: relative;
-            z-index: 10;
-            border-radius: 20px 20px 0 0;
-            padding: 4rem 0;
+        @keyframes glitchText {
+            0%, 100% { text-shadow: 0 0 30px rgba(0, 255, 0, 0.8); }
+            25% { text-shadow: 2px 0 0 #ff0000, -2px 0 0 #00ff00; }
+            50% { text-shadow: 0 0 30px rgba(0, 255, 0, 0.8); }
+            75% { text-shadow: -2px 0 0 #ff0000, 2px 0 0 #00ff00; }
         }
 
-        .section {
-            padding: 4rem 0;
-        }
-
-        .section h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: #2c3e50;
-        }
-
-        /* Estadísticas */
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 2rem;
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-            border-radius: 15px;
-            transition: transform 0.3s ease;
-        }
-
-        .stat-item:hover {
-            transform: translateY(-5px);
-        }
-
-        .stat-number {
-            font-size: 3rem;
-            font-weight: bold;
-            color: #1e3c72;
-            display: block;
-        }
-
-        .stat-label {
-            font-size: 1.1rem;
-            color: #7f8c8d;
-            margin-top: 0.5rem;
-        }
-
-        /* Catálogo Digital */
-        .catalog-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .book-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .book-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-        }
-
-        .book-cover {
-            height: 200px;
-            background: linear-gradient(45deg, #1e3c72, #2a5298);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.2rem;
-            font-weight: bold;
-            position: relative;
-        }
-
-        .book-cover::after {
-            content: "💾";
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 1.5rem;
-        }
-
-        .book-info {
-            padding: 1.5rem;
-        }
-
-        .book-info h3 {
-            margin-bottom: 0.5rem;
-            color: #2c3e50;
-        }
-
-        .book-author {
-            color: #7f8c8d;
-            font-style: italic;
-            margin-bottom: 1rem;
-        }
-
-        .book-year {
-            color: #95a5a6;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-
-        .book-formats {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .format-tag {
-            background: #ecf0f1;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            color: #2c3e50;
-        }
-
-        .download-buttons {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-        }
-
-        .download-btn {
-            background: linear-gradient(45deg, #27ae60, #2ecc71);
-            color: white;
-            padding: 0.8rem 1.2rem;
-            text-decoration: none;
-            border-radius: 25px;
-            font-weight: bold;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .download-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
-        }
-
-        .download-btn.pdf {
-            background: linear-gradient(45deg, #e74c3c, #c0392b);
-        }
-
-        .download-btn.epub {
-            background: linear-gradient(45deg, #9b59b6, #8e44ad);
-        }
-
-        .download-btn.mobi {
-            background: linear-gradient(45deg, #f39c12, #e67e22);
-        }
-
-        /* Filtros */
-        .filters {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 3rem;
-            flex-wrap: wrap;
-        }
-
-        .filter-btn {
-            background: #ecf0f1;
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 500;
-        }
-
-        .filter-btn.active,
-        .filter-btn:hover {
-            background: #1e3c72;
-            color: white;
-        }
-
-        /* Historia */
-        .history-timeline {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        .timeline-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 2rem;
-            padding: 1.5rem;
-            background: #f8f9fa;
-            border-radius: 10px;
-            border-left: 4px solid #1e3c72;
-        }
-
-        .timeline-year {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #1e3c72;
-            margin-right: 2rem;
-            min-width: 80px;
-        }
-
-        .timeline-content {
-            flex: 1;
-        }
-
-        /* Formulario de contacto */
-        .contact-form {
-            max-width: 600px;
-            margin: 0 auto;
-            background: #f8f9fa;
-            padding: 2rem;
-            border-radius: 15px;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: bold;
-            color: #2c3e50;
-        }
-
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 0.8rem;
-            border: 2px solid #e9ecef;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: #1e3c72;
-        }
-
-        .submit-btn {
-            background: linear-gradient(45deg, #1e3c72, #2a5298);
-            color: white;
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            width: 100%;
-        }
-
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(30, 60, 114, 0.3);
-        }
-
-        /* Footer */
-        footer {
-            background: #2c3e50;
-            color: white;
-            padding: 3rem 0;
-            text-align: center;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-section h3 {
-            margin-bottom: 1rem;
-            color: #1e3c72;
-        }
-
-        .footer-section p,
-        .footer-section a {
-            color: #bdc3c7;
-            text-decoration: none;
-            line-height: 1.8;
-        }
-
-        .footer-section a:hover {
-            color: #1e3c72;
-        }
-
-        /* Animaciones */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -455,351 +179,544 @@
             }
         }
 
-        .fade-in {
-            animation: fadeInUp 0.8s ease-out;
+        .products {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+            padding: 6rem 0;
+            position: relative;
         }
 
-        /* Responsive */
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            color: #00ff00;
+            position: relative;
+            text-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(135deg, #00ff00, #00cc00);
+            border-radius: 2px;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .product-card {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0, 255, 0, 0.3);
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(135deg, #00ff00, #00cc00);
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0, 255, 0, 0.2);
+            border-color: #00ff00;
+        }
+
+        .product-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #00ff00, #00cc00);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #000000;
+            margin-bottom: 2rem;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+        }
+
+        .product-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #00ff00;
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+        }
+
+        .product-card p {
+            color: #cccccc;
+            line-height: 1.8;
+        }
+
+        .innovation {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #00ff00;
+            padding: 6rem 0;
+            text-align: center;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            border: 1px solid rgba(0, 255, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .stat:hover {
+            border-color: #00ff00;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            display: block;
+            text-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+        }
+
+        .contact {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+            padding: 6rem 0;
+            text-align: center;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(0, 255, 0, 0.3);
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #00ff00;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid rgba(0, 255, 0, 0.3);
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            background: rgba(0, 0, 0, 0.7);
+            color: #ffffff;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #00ff00;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #00ff00, #00cc00);
+            color: #000000;
+            padding: 1rem 3rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 255, 0, 0.5);
+        }
+
+        footer {
+            background: #000000;
+            color: #00ff00;
+            text-align: center;
+            padding: 3rem 0;
+            border-top: 1px solid rgba(0, 255, 0, 0.3);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: #00ff00;
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+        }
+
+        .footer-section a {
+            color: #cccccc;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #00ff00;
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+        }
+
+        .terminal-window {
+            background: #000000;
+            border: 1px solid #00ff00;
+            border-radius: 5px;
+            margin: 2rem 0;
+            overflow: hidden;
+        }
+
+        .terminal-header {
+            background: #00ff00;
+            color: #000000;
+            padding: 0.5rem 1rem;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .terminal-body {
+            padding: 1rem;
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            line-height: 1.4;
+        }
+
         @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                gap: 1rem;
+            .nav-links {
+                display: none;
             }
 
-            nav ul {
-                flex-wrap: wrap;
-                gap: 1rem;
-            }
-
-            .hero-content h1 {
+            .hero h1 {
                 font-size: 2.5rem;
             }
 
-            .hero-content .subtitle {
-                font-size: 1.4rem;
+            .hero p {
+                font-size: 1.2rem;
             }
 
-            .catalog-grid {
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .products-grid {
                 grid-template-columns: 1fr;
             }
 
             .stats {
                 grid-template-columns: repeat(2, 1fr);
             }
-
-            .download-buttons {
-                flex-direction: column;
-            }
-
-            .filters {
-                flex-direction: column;
-                align-items: center;
-            }
         }
     </style>
 </head>
 <body>
     <header>
-        <div class="container">
-            <div class="header-content">
-                <div>
-                    <a href="#" class="logo">Editorial Nexor</a>
-                    <div class="established">Fundada en 1850</div>
-                </div>
-                <nav>
-                    <ul>
-                        <li><a href="#inicio">Inicio</a></li>
-                        <li><a href="#biblioteca">Biblioteca Digital</a></li>
-                        <li><a href="#historia">Historia</a></li>
-                        <li><a href="#nosotros">Nosotros</a></li>
-                        <li><a href="#contacto">Contacto</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
+        <nav class="container">
+            <div class="logo">Dynatrix Systems</div>
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#herramientas">Herramientas</a></li>
+                <li><a href="#investigacion">Investigación</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <section id="inicio" class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Editorial Nexor</h1>
-                <div class="subtitle">175 años de literatura universal</div>
-                <p>Descarga gratuitamente miles de libros digitales de nuestra histórica colección</p>
-                <a href="#biblioteca" class="cta-button">🔽 Explorar Biblioteca Digital</a>
-            </div>
-        </div>
-    </section>
-
     <main>
-        <div class="container">
-            <section class="section">
+        <section id="inicio" class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Dynatrix Systems</h1>
+                    <p>Herramientas avanzadas de hacking ético y pentesting</p>
+                    <a href="#herramientas" class="cta-button">Explorar Herramientas</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="herramientas" class="products">
+            <div class="container">
+                <h2 class="section-title">Arsenal de Herramientas</h2>
+                <div class="products-grid">
+                    <div class="product-card">
+                        <div class="product-icon">🔍</div>
+                        <h3>Hacker Search</h3>
+                        <p>Herramienta de reconocimiento avanzada que facilita la búsqueda de información desde la terminal. Incluye OSINT, búsqueda de subdominios, análisis de metadatos y un historial completo de investigaciones para pentesting profesional.</p>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-icon">🛡️</div>
+                        <h3>VulnScan Pro</h3>
+                        <p>Escáner de vulnerabilidades automatizado que identifica fallas de seguridad en aplicaciones web, redes y sistemas. Incluye reportes detallados y recomendaciones de remediación siguiendo estándares OWASP.</p>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-icon">💻</div>
+                        <h3>NetPentester</h3>
+                        <p>Suite completa de herramientas para pentesting de redes. Incluye port scanning, detección de servicios, análisis de protocolos y explotación controlada de vulnerabilidades en entornos autorizados.</p>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-icon">🔓</div>
+                        <h3>AuthBypass Kit</h3>
+                        <p>Conjunto de herramientas especializadas en pruebas de autenticación y autorización. Incluye técnicas de bypass, análisis de tokens, fuzzing de login y evaluación de controles de acceso.</p>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-icon">📊</div>
+                        <h3>ReportGen</h3>
+                        <p>Generador automatizado de reportes de pentesting profesionales. Crea documentación técnica detallada, resúmenes ejecutivos y recomendaciones de seguridad con métricas y evidencias.</p>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-icon">🌐</div>
+                        <h3>WebApp Analyzer</h3>
+                        <p>Analizador especializado en aplicaciones web que detecta vulnerabilidades como SQL injection, XSS, CSRF y más. Incluye crawling inteligente y análisis de código del lado cliente.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="investigacion" class="innovation">
+            <div class="container">
+                <h2 class="section-title">Investigación Continua</h2>
+                <p style="font-size: 1.3rem; margin-bottom: 3rem; opacity: 0.9; color: #ffffff;">
+                    En Dynatrix Systems, desarrollamos las herramientas que los ethical hackers necesitan para mantenerse un paso adelante de las amenazas. Nuestro equipo de investigadores en ciberseguridad trabaja constantemente en nuevas técnicas y metodologías de pentesting.
+                </p>
                 <div class="stats">
-                    <div class="stat-item">
-                        <span class="stat-number">12,450</span>
-                        <div class="stat-label">Libros Digitales</div>
+                    <div class="stat">
+                        <span class="stat-number">500K+</span>
+                        <span>Vulnerabilidades Detectadas</span>
                     </div>
-                    <div class="stat-item">
-                        <span class="stat-number">175</span>
-                        <div class="stat-label">Años de Historia</div>
+                    <div class="stat">
+                        <span class="stat-number">95+</span>
+                        <span>Países Utilizando</span>
                     </div>
-                    <div class="stat-item">
-                        <span class="stat-number">100%</span>
-                        <div class="stat-label">Gratuitos</div>
+                    <div class="stat">
+                        <span class="stat-number">99.8%</span>
+                        <span>Precisión en Detección</span>
                     </div>
-                    <div class="stat-item">
-                        <span class="stat-number">2.3M</span>
-                        <div class="stat-label">Descargas</div>
+                    <div class="stat">
+                        <span class="stat-number">24/7</span>
+                        <span>Investigación Activa</span>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
+    </main>
 
-            <section id="biblioteca" class="section">
-                <h2>Biblioteca Digital Gratuita</h2>
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Herramientas</h4>
+                    <a href="#">Hacker Search</a>
+                    <a href="#">VulnScan Pro</a>
+                    <a href="#">NetPentester</a>
+                    <a href="#">AuthBypass Kit</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Recursos</h4>
+                    <a href="#">Documentación</a>
+                    <a href="#">Metodologías</a>
+                    <a href="#">Casos de Estudio</a>
+                    <a href="#">CVE Database</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Comunidad</h4>
+                    <a href="#">Bug Bounty</a>
+                    <a href="#">Foro de Ethical Hackers</a>
+                    <a href="#">Certificaciones</a>
+                    <a href="#">Eventos</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <a href="mailto:security@dynatrix.com">security@dynatrix.com</a>
+                    <a href="#">📍 Ciudad de México, México</a>
+                    <a href="#">🔐 Comunicación Encriptada</a>
+                </div>
+            </div>
+            <p style="border-top: 1px solid rgba(0, 255, 0, 0.3); padding-top: 2rem; margin-top: 2rem;">
+                © 2025 Dynatrix Systems. Ethical Hacking & Penetration Testing Tools. Todos los derechos reservados.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Smooth scrolling para navegación
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Efecto parallax para el hero
+            window.addEventListener('scroll', function() {
+                const scrolled = window.pageYOffset;
+                const hero = document.querySelector('.hero');
+                if (hero) {
+                    hero.style.transform = `translateY(${scrolled * 0.3}px)`;
+                }
+            });
+
+            // Animación de entrada para las tarjetas
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.product-card').forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(50px)';
+                card.style.transition = `all 0.6s ease ${index * 0.1}s`;
+                observer.observe(card);
+            });
+
+            // Animación de contadores
+            function animateCounter(element, target) {
+                let current = 0;
+                const increment = target / 50;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        element.textContent = target + (element.textContent.includes('+') ? '+' : element.textContent.includes('%') ? '%' : '');
+                        clearInterval(timer);
+                    } else {
+                        element.textContent = Math.floor(current) + (element.textContent.includes('+') ? '+' : element.textContent.includes('%') ? '%' : '');
+                    }
+                }, 30);
+            }
+
+            const statsObserver = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const statNumber = entry.target.querySelector('.stat-number');
+                        const text = statNumber.textContent;
+                        if (text.includes('K+')) {
+                            animateCounter(statNumber, 500);
+                        } else if (text.includes('95+')) {
+                            animateCounter(statNumber, 95);
+                        } else if (text.includes('99.8%')) {
+                            animateCounter(statNumber, 99.8);
+                        }
+                        statsObserver.unobserve(entry.target);
+                    }
+                });
+            });
+
+            document.querySelectorAll('.stat').forEach(stat => {
+                statsObserver.observe(stat);
+            });
+
+            // Efectos de hover mejorados
+            document.querySelectorAll('.cta-button, .submit-btn').forEach(button => {
+                button.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-3px) scale(1.05)';
+                });
                 
-                <div class="filters">
-                    <button class="filter-btn active" data-filter="all">Todos</button>
-                    <button class="filter-btn" data-filter="poesia">Poesía</button>
-                    <button class="filter-btn" data-filter="novela">Novelas</button>
-                    <button class="filter-btn" data-filter="cuento">Cuentos</button>
-                    <button class="filter-btn" data-filter="teatro">Teatro</button>
-                    <button class="filter-btn" data-filter="ensayo">Ensayos</button>
-                </div>
+                button.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+
+            // Simulación de envío de formulario
+            const form = document.getElementById('contactForm');
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const submitBtn = this.querySelector('.submit-btn');
+                    const originalText = submitBtn.textContent;
+                    
+                    submitBtn.textContent = 'Encriptando...';
+                    submitBtn.disabled = true;
+
+                    setTimeout(() => {
+                        submitBtn.textContent = '✓ Enviado de Forma Segura';
+                        submitBtn.style.background = 'linear-gradient(135deg, #00ff00, #008800)';
+                        
+                        setTimeout(() => {
+                            submitBtn.textContent = originalText;
+                            submitBtn.disabled = false;
+                            submitBtn.style.background = 'linear-gradient(135deg, #00ff00, #00cc00)';
+                            this.reset();
+                        }, 3000);
+                    }, 2000);
+                });
+            }
+
+            // Efecto de texto en terminal
+            const terminalText = document.querySelector('.terminal-body');
+            if (terminalText) {
+                const originalText = terminalText.innerHTML;
+                terminalText.innerHTML = '';
                 
-                <div class="catalog-grid">
-                    <div class="book-card" data-category="poesia">
-                        <div class="book-cover">
-                            🌹 POESÍA CLÁSICA
-                        </div>
-                        <div class="book-info">
-                            <h3>Antología Poética Universal</h3>
-                            <p class="book-author">Varios Autores</p>
-                            <p class="book-year">Primera edición: 1875</p>
-                            <div class="book-formats">
-                                <span class="format-tag">PDF</span>
-                                <span class="format-tag">EPUB</span>
-                                <span class="format-tag">MOBI</span>
-                            </div>
-                            <p style="margin-bottom: 1rem;">Colección de los mejores poemas de la literatura universal desde el siglo XVI hasta el XIX.</p>
-                            <div class="download-buttons">
-                                <a href="#" class="download-btn pdf">📄 PDF</a>
-                                <a href="#" class="download-btn epub">📱 EPUB</a>
-                                <a href="#" class="download-btn mobi">📖 MOBI</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="book-card" data-category="novela">
-                        <div class="book-cover">
-                            🏰 NOVELA HISTÓRICA
-                        </div>
-                        <div class="book-info">
-                            <h3>Los Misterios de París</h3>
-                            <p class="book-author">Eugène Sue</p>
-                            <p class="book-year">Primera edición: 1852</p>
-                            <div class="book-formats">
-                                <span class="format-tag">PDF</span>
-                                <span class="format-tag">EPUB</span>
-                            </div>
-                            <p style="margin-bottom: 1rem;">Novela folletinesca que retrata la vida social del París del siglo XIX.</p>
-                            <div class="download-buttons">
-                                <a href="#" class="download-btn pdf">📄 PDF</a>
-                                <a href="#" class="download-btn epub">📱 EPUB</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="book-card" data-category="poesia">
-                        <div class="book-cover">
-                            🌙 POESÍA ROMÁNTICA
-                        </div>
-                        <div class="book-info">
-                            <h3>Cantos de Esperanza</h3>
-                            <p class="book-author">José Zorrilla</p>
-                            <p class="book-year">Primera edición: 1865</p>
-                            <div class="book-formats">
-                                <span class="format-tag">PDF</span>
-                                <span class="format-tag">EPUB</span>
-                                <span class="format-tag">MOBI</span>
-                            </div>
-                            <p style="margin-bottom: 1rem;">Colección de poemas románticos del maestro español del siglo XIX.</p>
-                            <div class="download-buttons">
-                                <a href="#" class="download-btn pdf">📄 PDF</a>
-                                <a href="#" class="download-btn epub">📱 EPUB</a>
-                                <a href="#" class="download-btn mobi">📖 MOBI</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="book-card" data-category="cuento">
-                        <div class="book-cover">
-                            📚 CUENTOS CLÁSICOS
-                        </div>
-                        <div class="book-info">
-                            <h3>Cuentos de la Alhambra</h3>
-                            <p class="book-author">Washington Irving</p>
-                            <p class="book-year">Primera edición: 1858</p>
-                            <div class="book-formats">
-                                <span class="format-tag">PDF</span>
-                                <span class="format-tag">EPUB</span>
-                            </div>
-                            <p style="margin-bottom: 1rem;">Relatos inspirados en las leyendas y la historia del palacio nazarí de Granada.</p>
-                            <div class="download-buttons">
-                                <a href="#" class="download-btn pdf">📄 PDF</a>
-                                <a href="#" class="download-btn epub">📱 EPUB</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="book-card" data-category="teatro">
-                        <div class="book-cover">
-                            🎭 TEATRO CLÁSICO
-                        </div>
-                        <div class="book-info">
-                            <h3>Don Juan Tenorio</h3>
-                            <p class="book-author">José Zorrilla</p>
-                            <p class="book-year">Primera edición: 1854</p>
-                            <div class="book-formats">
-                                <span class="format-tag">PDF</span>
-                                <span class="format-tag">EPUB</span>
-                                <span class="format-tag">MOBI</span>
-                            </div>
-                            <p style="margin-bottom: 1rem;">La obra teatral más representativa del romanticismo español.</p>
-                            <div class="download-buttons">
-                                <a href="#" class="download-btn pdf">📄 PDF</a>
-                                <a href="#" class="download-btn epub">📱 EPUB</a>
-                                <a href="#" class="download-btn mobi">📖 MOBI</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="book-card" data-category="ensayo">
-                        <div class="book-cover">
-                            ✍️ ENSAYO FILOSÓFICO
-                        </div>
-                        <div class="book-info">
-                            <h3>Meditaciones del Quijote</h3>
-                            <p class="book-author">José Ortega y Gasset</p>
-                            <p class="book-year">Primera edición: 1914</p>
-                            <div class="book-formats">
-                                <span class="format-tag">PDF</span>
-                                <span class="format-tag">EPUB</span>
-                            </div>
-                            <p style="margin-bottom: 1rem;">Ensayo fundamental sobre la filosofía española y la interpretación del Quijote.</p>
-                            <div class="download-buttons">
-                                <a href="#" class="download-btn pdf">📄 PDF</a>
-                                <a href="#" class="download-btn epub">📱 EPUB</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="book-card" data-category="novela">
-                        <div class="book-cover">
-                            🌊 NOVELA AVENTURAS
-                        </div>
-                        <div class="book-info">
-                            <h3>Veinte Mil Leguas de Viaje Submarino</h3>
-                            <p class="book-author">Julio Verne</p>
-                            <p class="book-year">Primera edición: 1871</p>
-                            <div class="book-formats">
-                                <span class="format-tag">PDF</span>
-                                <span class="format-tag">EPUB</span>
-                                <span class="format-tag">MOBI</span>
-                            </div>
-                            <p style="margin-bottom: 1rem;">La aventura submarina más famosa de la literatura universal.</p>
-                            <div class="download-buttons">
-                                <a href="#" class="download-btn pdf">📄 PDF</a>
-                                <a href="#" class="download-btn epub">📱 EPUB</a>
-                                <a href="#" class="download-btn mobi">📖 MOBI</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="book-card" data-category="poesia">
-                        <div class="book-cover">
-                            🍃 POESÍA MODERNA
-                        </div>
-                        <div class="book-info">
-                            <h3>Soledades y Galerías</h3>
-                            <p class="book-author">Antonio Machado</p>
-                            <p class="book-year">Primera edición: 1907</p>
-                            <div class="book-formats">
-                                <span class="format-tag">PDF</span>
-                                <span class="format-tag">EPUB</span>
-                            </div>
-                            <p style="margin-bottom: 1rem;">Obra cumbre de la poesía española del siglo XX.</p>
-                            <div class="download-buttons">
-                                <a href="#" class="download-btn pdf">📄 PDF</a>
-                                <a href="#" class="download-btn epub">📱 EPUB</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="book-card" data-category="cuento">
-                        <div class="book-cover">
-                            👻 CUENTOS GÓTICOS
-                        </div>
-                        <div class="book-info">
-                            <h3>Cuentos Extraordinarios</h3>
-                            <p class="book-author">Edgar Allan Poe</p>
-                            <p class="book-year">Primera edición: 1862</p>
-                            <div class="book-formats">
-                                <span class="format-tag">PDF</span>
-                                <span class="format-tag">EPUB</span>
-                                <span class="format-tag">MOBI</span>
-                            </div>
-                            <p style="margin-bottom: 1rem;">Selección de los mejores relatos del maestro del terror psicológico.</p>
-                            <div class="download-buttons">
-                                <a href="#" class="download-btn pdf">📄 PDF</a>
-                                <a href="#" class="download-btn epub">📱 EPUB</a>
-                                <a href="#" class="download-btn mobi">📖 MOBI</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section id="historia" class="section">
-                <h2>Nuestra Historia</h2>
-                <div class="history-timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-year">1850</div>
-                        <div class="timeline-content">
-                            <h3>Fundación de Editorial Nexor</h3>
-                            <p>Fundada en Madrid por los hermanos Alejandro y Fernando Nexor, con el objetivo de democratizar el acceso a la literatura universal.</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-year">1875</div>
-                        <div class="timeline-content">
-                            <h3>Expansión Internacional</h3>
-                            <p>Apertura de oficinas en París, Londres y Buenos Aires. Publicación de más de 500 títulos en diferentes idiomas.</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-year">1920</div>
-                        <div class="timeline-content">
-                            <h3>Era de Oro</h3>
-                            <p>Colaboración con los grandes autores de la época. Publicación de obras que se convertirían en clásicos universales.</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-year">1995</div>
-                        <div class="timeline-content">
-                            <h3>Revolución Digital</h3>
-                            <p>Pioneros en la digitalización de libros. Inicio del proyecto de biblioteca digital gratuita.</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-year">2025</div>
-                        <div class="timeline-content">
-                            <h3>Presente</h3>
-                            <p>Más de 12,000 libros digitales disponibles gratuitamente. Comprometidos con la preservación y difusión del patrimonio literario.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section id="nosotros" class="section">
-                <h2>Sobre Editorial Nexor</h2>
-                <div style="max-width: 800px; margin: 0 auto; text-align: center;">
-                    <p style
+                let i = 0;
+                function typeText() {
+                    if (i < originalText.length) {
+                        terminalText.innerHTML += originalText.charAt(i);
+                        i++;
+                        setTimeout(typeText, 50);
+                    }
+                }
+                
+                setTimeout(typeText, 1000);
+            }
+        });
+    </script>
+</body>
+</html>
